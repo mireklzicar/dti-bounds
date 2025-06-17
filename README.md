@@ -6,6 +6,7 @@ This repository contains the code and data for analyzing fundamental performance
 
 Joint embedding models like ConPlex, Drug CLIP, and SPRINT embed ligands and proteins in shared vector spaces, scoring interactions via geometric proximity. However, our analysis reveals that benchmark datasets (BindingDB, KIBA, DAVIS) contain systematic violations of metric axioms such as the triangle inequality. This creates fundamental performance ceilings that no contrastive model can exceed, regardless of architectural sophistication.
 
+
 ### Key Findings
 
 - **Metric violations**: Binding affinities in benchmark datasets violate basic metric axioms
@@ -88,7 +89,10 @@ Find triangle inequality violations in the datasets:
 python src/analysis/triangle_inequality.py data/datasets/BindingDB_IC50/sample.csv --output data/violations/BindingDB_IC50.csv
 ```
 
+![](assets/metric_violation.png)
+
 ### 4. Compute Performance Bounds
+
 
 #### Dot Product Models (ConPlex, Drug CLIP style)
 
@@ -123,45 +127,7 @@ For comprehensive experiments:
 python scripts/run_euclidean_experiments.py
 ```
 
-## Dataset Description
-
-### BindingDB
-- **IC50**: Half-maximal inhibitory concentration measurements
-- **Kd**: Dissociation constant measurements  
-- **Ki**: Inhibition constant measurements
-
-### KIBA
-- Kinase inhibitor bioactivity scores (fused from multiple assays)
-- 118,254 drug-target pairs across 2,111 ligands and 229 kinases
-
-### DAVIS
-- Complete kinase-inhibitor interaction matrix
-- 30,056 pairs across 68 kinases and 442 inhibitors
-
-## Understanding Results
-
-### Performance Bound Categories
-
-1. **Metric-friendly datasets** (BindingDB IC50, Ki)
-   - Near-perfect reconstruction at low dimensions (d=2-4)
-   - High measurement consistency
-
-2. **Dimensionality-limited datasets** (BindingDB Kd, KIBA)
-   - Require substantial capacity (d≥64) but achieve strong performance
-   - Complex but learnable interaction patterns
-
-3. **Geometry-limited datasets** (DAVIS)
-   - Fundamental performance ceilings even at high dimensions
-   - Inherent non-metric structure in biochemical data
-
-### Output Files
-
-Each experiment produces:
-- `embeddings.pt`: Full embedding tensor
-- `drug_embeddings.pt`: Drug embeddings only
-- `target_embeddings.pt`: Target embeddings only
-- `*_mapping.csv`: ID to index mappings
-- `metrics.json`: Performance metrics and parameters
+![](assets/correlations.png)
 
 ## Key Scripts
 
@@ -173,6 +139,16 @@ SMACOF (Stress Majorization) implementation for Euclidean distance embeddings. U
 
 ### [`src/analysis/triangle_inequality.py`](src/analysis/triangle_inequality.py)
 Identifies 2×2 bicliques where rectangular inequality violations occur, proving non-embeddability in metric spaces.
+
+
+### Output Files
+
+Each experiment produces:
+- `embeddings.pt`: Full embedding tensor
+- `drug_embeddings.pt`: Drug embeddings only
+- `target_embeddings.pt`: Target embeddings only
+- `*_mapping.csv`: ID to index mappings
+- `metrics.json`: Performance metrics and parameters
 
 ## Citation
 

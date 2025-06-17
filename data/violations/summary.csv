@@ -1,0 +1,6 @@
+dataset,violations_found,violation_percentage
+BindingDB_Kd,3,0.0
+BindingDB_Ki,10,0.0
+BindingDB_IC50,10,0.0
+DAVIS,0,0
+KIBA,10,0.0

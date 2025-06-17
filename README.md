@@ -1,4 +1,5 @@
 # Performance Bounds for Joint Embedding Models in Drug-Target Interaction Prediction
+[![DOI](https://zenodo.org/badge/1003788852.svg)](https://doi.org/10.5281/zenodo.15685067)
 
 This repository contains the code and data for analyzing fundamental performance limits of contrastive drug-target interaction (DTI) models. The work demonstrates that binding affinities in standard benchmarks systematically violate basic metric axioms, establishing theoretical upper bounds on achievable performance.
 

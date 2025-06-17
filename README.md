@@ -59,16 +59,7 @@ dti-bounds/
 ```
 
 ## Usage
-
-### 1. Reorganize Repository Structure
-
-First, reorganize the repository to the clean structure:
-
-```bash
-python reorganize_repo.py
-```
-
-### 2. Download Datasets
+### Download Datasets
 
 Download and preprocess the benchmark datasets:
 
@@ -81,7 +72,7 @@ This downloads and processes:
 - DAVIS
 - KIBA
 
-### 3. Analyze Metric Violations
+### Analyze Metric Violations
 
 Find triangle inequality violations in the datasets:
 
@@ -91,7 +82,7 @@ python src/analysis/triangle_inequality.py data/datasets/BindingDB_IC50/sample.c
 
 ![](assets/metric_violation.png)
 
-### 4. Compute Performance Bounds
+### Compute Performance Bounds
 
 
 #### Dot Product Models (ConPlex, Drug CLIP style)

@@ -17,7 +17,7 @@ DATASETS = [
 ]
 DIMENSIONS = [2, 4, 8, 16, 32, 64, 128]
 BASE_DIR = "."
-MDS_SCRIPT = "mds_dot.py"  # Path to the simplified MDS script
+MDS_SCRIPT = "../src/experiments/dot_product_mds.py"  # Path to the simplified MDS script
 OUT_DIR = "results/dot"
 LOG_DIR = "results/logs/"
 

@@ -40,13 +40,13 @@ After running the reorganization script:
 ```
 dti-bounds/
 ├── src/
-│   ├── data/                    # Data downloading and preprocessing
+│   ├── data/                   # Data downloading and preprocessing
 │   │   └── download_datasets.py
 │   ├── analysis/               # Metric violation analysis
 │   │   └── triangle_inequality.py
 │   ├── experiments/            # MDS implementations
-│   │   ├── dot_product.py      # Dot-product similarity MDS
-│   │   └── euclidean_mds.py    # Euclidean distance MDS (SMACOF)
+│   │   ├── dot_product_mds.py  # Dot-product similarity MDS
+│   │   └── euclidean_smacof.py # Euclidean distance MDS (SMACOF)
 │   └── utils/                  # Utility functions
 ├── scripts/                    # Experiment runners
 │   ├── run_dot_experiments.py
@@ -94,7 +94,7 @@ python src/analysis/triangle_inequality.py data/datasets/BindingDB_IC50/sample.c
 
 For single experiment:
 ```bash
-python src/experiments/dot_product.py \
+python src/experiments/dot_product_mds.py \
     -i data/datasets/DAVIS/sample.csv \
     -o results/dot/DAVIS_dim64 \
     --dim 64 \
@@ -111,7 +111,7 @@ python scripts/run_dot_experiments.py
 
 For single experiment:
 ```bash
-python src/experiments/euclidean_mds.py \
+python src/experiments/euclidean_smacof.py \
     -i data/datasets/DAVIS/sample.csv \
     -o results/euclidean/DAVIS_dim64 \
     --dim 64 \
@@ -165,25 +165,14 @@ Each experiment produces:
 
 ## Key Scripts
 
-### [`src/experiments/dot_product.py`](src/experiments/dot_product.py)
+### [`src/experiments/dot_product_mds.py`](src/experiments/dot_product_mds.py)
 GPU-accelerated dot-product similarity optimization with SGD. Minimizes squared reconstruction error for inner-product models.
 
-### [`src/experiments/euclidean_mds.py`](src/experiments/euclidean_mds.py)
+### [`src/experiments/euclidean_smacof.py`](src/experiments/euclidean_smacof.py)
 SMACOF (Stress Majorization) implementation for Euclidean distance embeddings. Uses chunked GPU operations for memory efficiency.
 
 ### [`src/analysis/triangle_inequality.py`](src/analysis/triangle_inequality.py)
 Identifies 2×2 bicliques where rectangular inequality violations occur, proving non-embeddability in metric spaces.
-
-## Performance Bounds Summary
-
-| Dataset | Method | d=2 | d=16 | d=64 | d=128 |
-|---------|--------|-----|------|------|-------|
-| DAVIS | Dot Product ρ | 0.51 | 0.68 | 0.76 | 0.78 |
-| DAVIS | Euclidean ρ | - | 0.64 | 0.73 | 0.76 |
-| KIBA | Dot Product ρ | 0.70 | 0.92 | 0.98 | 0.98 |
-| BindingDB Kd | Dot Product ρ | 0.48 | 0.78 | 0.89 | 0.94 |
-
-*ρ = Spearman correlation (rank correlation)*
 
 ## Citation
 
@@ -198,20 +187,6 @@ If you use this code or data in your research, please cite:
 }
 ```
 
-## Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Submit a pull request
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contact
-
-For questions or issues, please open a GitHub issue or contact:
-- Miroslav Lžičař: miroslav.lzicar@deepmedchem.com
-- Deep MedChem: https://deepmedchem.com/

@@ -54,9 +54,16 @@ dti-bounds/
 │   ├── run_dot_experiments.py
 │   └── run_euclidean_experiments.py
 ├── data/                       # Data storage
-│   ├── datasets/              # Downloaded datasets
-│   └── violations/            # Triangle inequality violations
-└── results/                   # Experimental results
+│   ├── datasets/               # Downloaded datasets
+│   ├── correlations            # Bounds on correlation
+│   │   ├── correlations_dot.csv
+│   │   └── correlations_euclidean.csv
+│   └── violations/             # Triangle inequality violations
+├── figures
+│   ├── correlations_by_dimension.R
+│   ├── correlations_scatter.R
+│   └── correlations.R
+└── results/                    # Experimental results
 ```
 
 ## Usage
